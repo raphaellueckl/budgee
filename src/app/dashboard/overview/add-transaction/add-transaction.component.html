@@ -1,0 +1,76 @@
+<div class="ui centered grid">
+  <div class="four wide column">
+    <form class="ui form" #transactionForm="ngForm" (ngSubmit)="onSubmit()">
+      <h3 class="ui header">Add a Transaction</h3>
+
+      <div class="ui form error">
+        <div class="field" [class.error]="!newtitle.valid && newtitle.touched">
+          <label>Title</label>
+          <input type="text"
+                 class="form-control"
+                 id="title"
+                 name="title"
+                 #newtitle="ngModel"
+                 placeholder="Title"
+                 [(ngModel)]="title"
+                 required>
+          <div *ngIf="(!newtitle.valid && !newtitle.pristine)" class="ui error message">
+            <p>Title must be set.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="ui form error">
+        <div class="field" [class.error]="!newcategory.valid && newcategory.touched">
+          <label>Category</label>
+          <input type="text"
+                 class="form-control"
+                 id="category"
+                 name="category"
+                 #newcategory="ngModel"
+                 placeholder="Category"
+                 [(ngModel)]="category"
+                 required>
+          <div *ngIf="(!newcategory.valid && !newcategory.pristine)" class="ui error message">
+            <p>Category must be set.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ui form error">
+        <div class="field" [class.error]="!newperiod.valid && newperiod.touched">
+          <label>Period</label>
+          <input type="text"
+                 class="form-control"
+                 id="period"
+                 name="period"
+                 #newperiod="ngModel"
+                 placeholder="Period"
+                 [(ngModel)]="period"
+                 required>
+          <div *ngIf="(!newperiod.valid && !newperiod.pristine)" class="ui error message">
+            <p>Period must be set.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ui form error">
+        <div class="field" [class.error]="!newvalue.valid && newvalue.touched">
+          <label>Value</label>
+          <input type="number"
+                 class="form-control"
+                 id="value"
+                 name="value"
+                 #newvalue="ngModel"
+                 placeholder="Value"
+                 [(ngModel)]="value"
+                 required>
+          <div *ngIf="(!newvalue.valid && !newvalue.pristine)" class="ui error message">
+            <p>Value must be set.</p>
+          </div>
+        </div>
+      </div>
+      <br />
+      <button class="ui positive submit button" type="submit" [disabled]="!transactionForm.valid">Submit</button>
+    </form>
+    <button class="ui positive submit button" (click)="onDownload()">Download</button>
+  </div>
+</div>

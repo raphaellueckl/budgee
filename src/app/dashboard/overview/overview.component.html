@@ -1,0 +1,6 @@
+<!-- Child-to-other-child-communication -->
+<div [@flyInOut]>
+  <app-add-transaction (transactionEmitter)="onSubmit($event)" (download)="exportJson()"></app-add-transaction>
+
+  <app-transaction-list [transactions]="transactions"></app-transaction-list>
+</div>
