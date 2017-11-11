@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Transaction} from '../entity/transaction.model';
 import {Observable} from 'rxjs/Observable';
 import {Http, Response} from '@angular/http';
-import 'rxjs/Rx';
 
 @Injectable()
 export class TransactionService {
@@ -14,9 +13,10 @@ export class TransactionService {
   }
 
   getAll(): Observable<Transaction[]> {
-    return this.http.get('')
-      .map((r: Response) => r.json() as Transaction[])
-      .catch(e => Observable.throw(e));
+    // return this.http.get('')
+    //   .map((r: Response) => r.json() as Transaction[])
+    //   .catch(e => Observable.throw(e));
+    return null;
   }
 
 }
