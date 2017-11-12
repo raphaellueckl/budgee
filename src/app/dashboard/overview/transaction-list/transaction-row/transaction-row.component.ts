@@ -5,9 +5,6 @@ import {Transaction} from '../../../../entity/transaction.model';
   selector: 'app-transaction',
   templateUrl: './transaction-row.component.html',
   styleUrls: ['./transaction-row.component.css'],
-  // host: {
-  //   class: 'row'
-  // }
 })
 export class TransactionComponent implements OnInit {
 
