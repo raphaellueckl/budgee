@@ -4,7 +4,7 @@ export function routerTransition() {
   return flyInOut();
 }
 
-function flyInOut() {
+export function flyInOut() {
   return trigger('flyInOut', [
     state('in', style({transform: 'translateX(0)', opacity: 1})),
     // state('out', style({transform: 'translateX(100)'})),
