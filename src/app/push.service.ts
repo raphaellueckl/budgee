@@ -13,8 +13,11 @@ export class PushService {
 
   private API_URL: string;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
-    this.API_URL = this.configService.get('API_URL');
+  constructor(
+    // private http: HttpClient,
+    // private configService: ConfigService
+  ) {
+    // this.API_URL = this.configService.get('API_URL');
   }
 
   urlBase64ToUint8Array(base64String) {
@@ -38,9 +41,9 @@ export class PushService {
       subscription: subscription
     };
 
-    return this.http
-      .post(url, body)
-      .catch(this.handleError);
+    // return this.http
+    //   .post(url, body)
+    //   .catch(this.handleError);
 
   }
 
@@ -54,9 +57,9 @@ export class PushService {
       subscription: subscription
     };
 
-    return this.http
-      .post(url, body)
-      .catch(this.handleError);
+    // return this.http
+    //   .post(url, body)
+    //   .catch(this.handleError);
 
   }
 

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ServiceWorkerModule} from '@angular/service-worker';
+import {ServiceWorkerModule, SwPush} from '@angular/service-worker';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -16,7 +16,10 @@ import {AddTransactionComponent} from './dashboard/overview/add-transaction/add-
 import {TransactionListComponent} from './dashboard/overview/transaction-list/transaction-list.component';
 import {DashboardRoutingModule} from './dashboard/dashboard-routing.module';
 import {TransactionService} from './service/transaction.service';
-import { environment } from '../environments/environment';
+import {environment} from '../environments/environment';
+import { ControlPushComponent } from './control-push/control-push.component';
+import {PushService} from './push.service';
+import {ConfigService} from './config.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { environment } from '../environments/environment';
     CalculatorComponent,
     TransactionComponent,
     AddTransactionComponent,
-    TransactionListComponent
+    TransactionListComponent,
+    ControlPushComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,12 @@ import { environment } from '../environments/environment';
       ? ServiceWorkerModule.register('/ngsw-worker.js')
       : []
   ],
-  providers: [TransactionService],
+  providers: [
+    TransactionService,
+    PushService,
+    SwPush,
+    ConfigService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
