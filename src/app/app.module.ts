@@ -15,6 +15,7 @@ import {AddTransactionComponent} from './dashboard/overview/add-transaction/add-
 import {TransactionListComponent} from './dashboard/overview/transaction-list/transaction-list.component';
 import {DashboardRoutingModule} from './dashboard/dashboard-routing.module';
 import {TransactionService} from './service/transaction.service';
+import {ToastModule} from 'ng2-toastr';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {TransactionService} from './service/transaction.service';
     RouterModule,
     DashboardRoutingModule,
     BrowserAnimationsModule,
+    ToastModule.forRoot()
   ],
   providers: [TransactionService],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewContainerRef} from '@angular/core';
 import {Transaction} from '../../../entity/transaction.model';
+import {ToastsManager} from 'ng2-toastr';
 
 @Component({
   selector: 'app-add-transaction',
@@ -16,13 +17,16 @@ export class AddTransactionComponent implements OnInit {
   public period: string;
   public value: string;
 
-  constructor() { }
+  constructor(public toastr: ToastsManager, vsc: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vsc);
+  }
 
   ngOnInit() {
   }
 
   public onSubmit(): void {
     const trans: Transaction = new Transaction(this.title, this.category, this.period, this.value);
+    this.toastr.success('Cool!!', 'Yeah!');
     this.transactionEmitter.emit(trans);
   }
 

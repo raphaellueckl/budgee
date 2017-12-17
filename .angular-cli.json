@@ -20,6 +20,7 @@
       "prefix": "app",
       "styles": [
         "semantic-ui/semantic.min.css",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "styles.css"
       ],
       "scripts": [],
