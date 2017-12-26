@@ -1,43 +1,60 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {DialogComponent} from './dialog/dialog.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {AppComponent} from './app.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {OverviewComponent} from './dashboard/overview/overview.component';
-import {StatisticsComponent} from './dashboard/statistics/statistics.component';
-import {CalculatorComponent} from './dashboard/calculator/calculator.component';
-import {RouterModule} from '@angular/router';
-import {TransactionComponent} from './dashboard/overview/transaction-list/transaction-row/transaction-row.component';
-import {AddTransactionComponent} from './dashboard/overview/add-transaction/add-transaction.component';
-import {TransactionListComponent} from './dashboard/overview/transaction-list/transaction-list.component';
-import {DashboardRoutingModule} from './dashboard/dashboard-routing.module';
-import {TransactionService} from './service/transaction.service';
-import {ToastModule} from 'ng2-toastr';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    OverviewComponent,
-    StatisticsComponent,
-    CalculatorComponent,
-    TransactionComponent,
-    AddTransactionComponent,
-    TransactionListComponent
+    DialogComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule,
-    DashboardRoutingModule,
     BrowserAnimationsModule,
-    ToastModule.forRoot()
+    FormsModule,
+    HttpClientModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+
+    // Material
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+    MatToolbarModule,
+    // Flex-layout
+    FlexLayoutModule
   ],
-  providers: [TransactionService],
+  providers: [],
+  entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

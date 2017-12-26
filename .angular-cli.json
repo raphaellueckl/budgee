@@ -9,7 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.png"
+        "favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -19,9 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "semantic-ui/semantic.min.css",
-        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
-        "styles.css"
+        "styles.css",
+        "theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
