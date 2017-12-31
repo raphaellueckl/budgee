@@ -8,12 +8,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MaterialModule} from './material.module';
+import {TransactionsComponent} from './transactions/transactions.component';
+import {OverviewComponent} from './overview/overview.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent
+    DialogComponent,
+    TransactionsComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
