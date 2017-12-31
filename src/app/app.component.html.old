@@ -1,7 +1,6 @@
 <div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
 
   <mat-toolbar color="primary">
-    toolbar
     <mat-toolbar-row>
       <span>Angular Material</span>
 
@@ -15,7 +14,6 @@
   </mat-toolbar>
 
   <mat-sidenav-container fxFlex>
-    sidenav
     <mat-sidenav mode="side" opened>
 
       <mat-tab-group>
