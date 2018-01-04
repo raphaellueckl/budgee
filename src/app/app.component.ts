@@ -20,10 +20,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
     // Create 100 users
     const users: UserData[] = [];
-    for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
+    for (let i = 1; i <= 110; i++) { users.push(createNewUser(i)); }
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
@@ -45,6 +45,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+  }
+
+  openNewTransactionDialog() {
+    this.dialog.open(DialogComponent).afterClosed()
+      .filter(result => !!result)
+      .subscribe(user => {
+        this.users.push(user);
+        this.selectedUser = user;
+      });
   }
 
 }
