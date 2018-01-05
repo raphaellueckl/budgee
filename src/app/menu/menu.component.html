@@ -1,0 +1,95 @@
+<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Budgee</span>
+
+      <!-- Filler that pushes the menu button to the end of the toolbar -->
+      <span fxFlex></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlex>
+    <!--<mat-sidenav-container>-->
+
+    <!--<mat-sidenav mode="side" opened>-->
+    <!--<mat-tab-group>-->
+    <!--<mat-tab label="Users">-->
+    <!--<mat-nav-list>-->
+    <!--<mat-list-item *ngFor="let user of users" (click)="selectedUser = user">-->
+    <!--<mat-icon matListAvatar svgIcon="avatars:{{user.avatar}}" class="avatar"></mat-icon>-->
+    <!--<span>{{user.name}}</span>-->
+    <!--</mat-list-item>-->
+    <!--</mat-nav-list>-->
+    <!--</mat-tab>-->
+    <!--<mat-tab label="Settings">-->
+    <!--<span>Settings</span>-->
+    <!--</mat-tab>-->
+    <!--</mat-tab-group>-->
+    <!--</mat-sidenav>-->
+
+    <!--<div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">-->
+    <div class="content">
+
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+
+      <div class="example-container mat-elevation-z8">
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="progress">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Progress</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.progress}}%</mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+          </ng-container>
+
+          <!-- Color Column -->
+          <ng-container matColumnDef="color">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Color</mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+      </div>
+
+      <mat-menu #themeMenu x-position="before">
+        <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+      </mat-menu>
+
+      <button mat-fab (click)="openNewTransactionDialog()" class="fab-bottom-right">
+        <mat-icon>add</mat-icon>
+      </button>
+
+    </div>
+
+  </mat-sidenav-container>
+
+
+
+</div>
