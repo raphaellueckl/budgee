@@ -1,14 +1,21 @@
 import {Component} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
+import {Period, Transaction} from '../model/transaction';
 
 @Component({
   templateUrl: 'dialog.component.html'
 })
 export class DialogComponent {
 
-  avatars = new Array(16).fill(0).map((_, i) => `svg-${i+1}`);
-  selectedAvatar = this.avatars[0];
+  periods = [Period.Daily, Period.Weekly, Period.Quarter, Period.Monthly, Period.SixMonths, Period.Yearly];
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>) {}
+  title: string;
+  category: string;
+  period = this.periods[Period.Monthly];
+  value: number;
+  isIncome = false;
+
+  constructor(public dialogRef: MatDialogRef<DialogComponent>) {
+  }
 
 }

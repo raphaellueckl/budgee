@@ -4,23 +4,25 @@
 
   <div fxLayout="column" fxLayoutGap="8px">
     <mat-form-field>
-      <input matInput ngModel name="name" placeholder="Title" required>
+      <input matInput [(ngModel)]="title" name="title" placeholder="Title" required>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput ngModel name="name" placeholder="Category" required>
+      <input matInput [(ngModel)]="category" name="category" placeholder="Category" required>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput ngModel name="name" placeholder="Full name" required>
+      <mat-select name="period" fxFlex placeholder="Period" [(ngModel)]="period">
+        <mat-option *ngFor="let p of periods; let i = index;" [value]="p">{{p}}</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput ngModel name="name" placeholder="Value" required>
+      <input matInput [(ngModel)]="value" name="value" placeholder="Value" required>
     </mat-form-field>
 
     <div fxLayout="row" fxLayoutGap="24px">
-      <mat-checkbox ngModel name="isIncome">Add as income</mat-checkbox>
+      <mat-checkbox [(ngModel)]="isIncome" name="isIncome">Add as income</mat-checkbox>
     </div>
   </div>
 
