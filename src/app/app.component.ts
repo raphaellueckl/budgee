@@ -4,6 +4,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {DialogComponent} from './dialog/dialog.component';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
+import 'rxjs/add/operator/filter';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -49,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   openNewTransactionDialog() {
     this.dialog.open(DialogComponent).afterClosed()
-      // .filter(result => !!result)
+      .filter(result => !!result)
       .subscribe(newTransaction => {
         console.log(newTransaction);
         // this.users.push(user);
