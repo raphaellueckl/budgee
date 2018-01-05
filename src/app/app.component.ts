@@ -49,10 +49,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   openNewTransactionDialog() {
     this.dialog.open(DialogComponent).afterClosed()
-      .filter(result => !!result)
-      .subscribe(user => {
-        this.users.push(user);
-        this.selectedUser = user;
+      // .filter(result => !!result)
+      .subscribe(newTransaction => {
+        console.log(newTransaction);
+        // this.users.push(user);
+        // this.selectedUser = user;
       });
   }
 
