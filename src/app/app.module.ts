@@ -11,6 +11,7 @@ import {MaterialModule} from './material.module';
 import {TransactionsComponent} from './transactions/transactions.component';
 import {OverviewComponent} from './overview/overview.component';
 import {MenuComponent} from './menu/menu.component';
+import {ManageComponent} from './manage/manage.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {MenuComponent} from './menu/menu.component';
     DialogComponent,
     TransactionsComponent,
     OverviewComponent,
-    MenuComponent
+    MenuComponent,
+    ManageComponent
   ],
   imports: [
     BrowserModule,
