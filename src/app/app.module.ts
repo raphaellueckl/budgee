@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MaterialModule} from './material.module';
 import {TransactionsComponent} from './transactions/transactions.component';
 import {OverviewComponent} from './overview/overview.component';
+import {MenuComponent} from './menu/menu.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {OverviewComponent} from './overview/overview.component';
     AppComponent,
     DialogComponent,
     TransactionsComponent,
-    OverviewComponent
+    OverviewComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
