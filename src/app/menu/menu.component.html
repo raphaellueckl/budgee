@@ -1,8 +1,11 @@
 <div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
 
   <mat-toolbar color="primary">
-    <mat-toolbar-row>
+    <!--<mat-toolbar-row>-->
       <span>Budgee</span>
+
+    <a [@flyInOut] routerLink="/overview" mat-button>Overview</a>
+    <a [@flyInOut] routerLink="/manage" mat-button>Manage</a>
 
       <!-- Filler that pushes the menu button to the end of the toolbar -->
       <span fxFlex></span>
@@ -10,7 +13,7 @@
       <button mat-icon-button [matMenuTriggerFor]="themeMenu">
         <mat-icon>more_vert</mat-icon>
       </button>
-    </mat-toolbar-row>
+    <!--</mat-toolbar-row>-->
   </mat-toolbar>
 
   <mat-menu #themeMenu x-position="before">
@@ -18,7 +21,6 @@
   </mat-menu>
 
   <mat-sidenav-container fxFlex>
-    <!--<mat-sidenav-container>-->
 
     <!--<mat-sidenav mode="side" opened>-->
     <!--<mat-tab-group>-->
@@ -36,10 +38,10 @@
     <!--</mat-tab-group>-->
     <!--</mat-sidenav>-->
 
-    <!--<div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">-->
     <div class="content">
 
-      <app-manage></app-manage>
+      <router-outlet></router-outlet>
+      <!--<app-manage></app-manage>-->
 
     </div>
 
