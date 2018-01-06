@@ -12,6 +12,7 @@ import {TransactionsComponent} from './transactions/transactions.component';
 import {OverviewComponent} from './overview/overview.component';
 import {MenuComponent} from './menu/menu.component';
 import {ManageComponent} from './manage/manage.component';
+import {RoutingModule} from './routing/routing.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {ManageComponent} from './manage/manage.component';
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
 
-    MaterialModule
+    MaterialModule,
+    RoutingModule
   ],
   providers: [],
   entryComponents: [DialogComponent],

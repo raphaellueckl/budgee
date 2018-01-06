@@ -1,11 +1,13 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogComponent} from '../dialog/dialog.component';
+import {routerTransition} from '../routing/router-transitions';
 
 @Component({
   selector: 'app-manage',
   templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.css']
+  styleUrls: ['./manage.component.css'],
+  animations: [routerTransition()]
 })
 export class ManageComponent implements OnInit, AfterViewInit {
 
