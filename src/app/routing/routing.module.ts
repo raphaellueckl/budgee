@@ -5,7 +5,8 @@ import {ManageComponent} from '../manage/manage.component';
 import {OverviewComponent} from '../overview/overview.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/overview', pathMatch: 'full' },
+  // { path: '', redirectTo: '/overview', pathMatch: 'full' },
+  { path: '', redirectTo: '/manage', pathMatch: 'full' },
   { path: 'overview',  component: OverviewComponent },
   { path: 'manage',  component: ManageComponent},
 ];
