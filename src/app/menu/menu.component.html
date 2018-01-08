@@ -1,0 +1,52 @@
+<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
+
+  <mat-toolbar color="primary">
+    <!--<mat-toolbar-row>-->
+      <span>Budgee</span>
+
+    <a [@flyInOut] routerLink="/overview" mat-button>Overview</a>
+    <a [@flyInOut] routerLink="/manage" mat-button>Manage</a>
+
+      <!-- Filler that pushes the menu button to the end of the toolbar -->
+      <span fxFlex></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    <!--</mat-toolbar-row>-->
+  </mat-toolbar>
+
+  <mat-menu #themeMenu x-position="before">
+    <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+  </mat-menu>
+
+  <mat-sidenav-container fxFlex>
+
+    <!--<mat-sidenav mode="side" opened>-->
+    <!--<mat-tab-group>-->
+    <!--<mat-tab label="Users">-->
+    <!--<mat-nav-list>-->
+    <!--<mat-list-item *ngFor="let user of users" (click)="selectedUser = user">-->
+    <!--<mat-icon matListAvatar svgIcon="avatars:{{user.avatar}}" class="avatar"></mat-icon>-->
+    <!--<span>{{user.name}}</span>-->
+    <!--</mat-list-item>-->
+    <!--</mat-nav-list>-->
+    <!--</mat-tab>-->
+    <!--<mat-tab label="Settings">-->
+    <!--<span>Settings</span>-->
+    <!--</mat-tab>-->
+    <!--</mat-tab-group>-->
+    <!--</mat-sidenav>-->
+
+    <div class="content">
+
+      <router-outlet></router-outlet>
+      <!--<app-manage></app-manage>-->
+
+    </div>
+
+  </mat-sidenav-container>
+
+
+
+</div>

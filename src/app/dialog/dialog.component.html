@@ -1,0 +1,34 @@
+<h3>Add Transaction</h3>
+
+<form #form="ngForm" (ngSubmit)="dialogRef.close(form.value)" ngNativeValidate>
+
+  <div fxLayout="column" fxLayoutGap="8px">
+    <mat-form-field>
+      <input matInput [(ngModel)]="title" name="title" placeholder="Title" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="category" name="category" placeholder="Category" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select name="period" fxFlex placeholder="Period" [(ngModel)]="period">
+        <mat-option *ngFor="let p of periods; let i = index;" [value]="p">{{p}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="value" name="value" placeholder="Value" required>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="24px">
+      <mat-checkbox [(ngModel)]="isIncome" name="isIncome">Add as income</mat-checkbox>
+    </div>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+    <button mat-button color="accent">Save</button>
+  </mat-dialog-actions>
+
+</form>

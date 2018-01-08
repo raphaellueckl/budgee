@@ -19,9 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "semantic-ui/semantic.min.css",
-        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
-        "styles.css"
+        "styles.css",
+        "theme.scss",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
