@@ -21,7 +21,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
   constructor(private dialog: MatDialog) {
     // Create 100 users
     const users: Transaction[] = [];
-    for (let i = 1; i <= 110; i++) {
+    for (let i = 1; i <= 1; i++) {
       const transaction = new Transaction();
       transaction.title = `Hans ${i}`;
       transaction.category = 'Cat';
@@ -56,8 +56,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
     this.dialog.open(DialogComponent).afterClosed()
       .filter(result => !!result)
       .subscribe(newTransaction => {
-        const hans: string = newTransaction;
-        console.log(newTransaction);
+        let a = new Transaction();
+        a.title = newTransaction.title;
+        a.category = newTransaction.category;
+        a.period = <Period>Period[newTransaction.period];
+        a.value = +newTransaction.value;
+        let data = this.dataSource.data;
+        data.push(a);
+        this.dataSource = new MatTableDataSource(data);
       });
   }
 
