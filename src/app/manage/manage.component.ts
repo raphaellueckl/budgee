@@ -12,7 +12,7 @@ import {Period, Transaction} from '../model/transaction';
 })
 export class ManageComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['title', 'category', 'period', 'value'];
+  displayedColumns = ['title', 'category', 'period', 'value', 'remove'];
   dataSource: MatTableDataSource<Transaction>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -52,7 +52,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  openNewTransactionDialog() {
+  addNewTransactionDialog() {
     this.dialog.open(DialogComponent).afterClosed()
       .filter(result => !!result)
       .subscribe(newTransaction => {
@@ -65,6 +65,11 @@ export class ManageComponent implements OnInit, AfterViewInit {
         data.push(a);
         this.dataSource = new MatTableDataSource(data);
       });
+  }
+
+  removeTransaction(row) {
+    const news = this.dataSource.data.filter(trans => trans.title !== row.title);
+    this.dataSource.data = news;
   }
 
 }
