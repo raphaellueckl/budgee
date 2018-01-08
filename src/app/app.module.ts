@@ -13,6 +13,7 @@ import {OverviewComponent} from './overview/overview.component';
 import {MenuComponent} from './menu/menu.component';
 import {ManageComponent} from './manage/manage.component';
 import {RoutingModule} from './routing/routing.module';
+import {ToastModule} from 'ng2-toastr';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {RoutingModule} from './routing/routing.module';
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
 
     MaterialModule,
-    RoutingModule
+    RoutingModule,
+    ToastModule.forRoot()
   ],
   providers: [],
   entryComponents: [DialogComponent],

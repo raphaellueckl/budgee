@@ -29,6 +29,11 @@
         <mat-cell *matCellDef="let row" [style.color]="row.value"> {{row.value}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="income">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Income?</mat-header-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.isIncome"> {{row.isIncome}}</mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="remove">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Remove</mat-header-cell>
         <mat-cell *matCellDef="let row" (click)="removeTransaction(row)"> 🗑️</mat-cell>

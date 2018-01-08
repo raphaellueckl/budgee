@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogComponent} from '../dialog/dialog.component';
 import {routerTransition} from '../routing/router-transitions';
 import {Period, Transaction} from '../model/transaction';
+import {ToastsManager} from 'ng2-toastr';
 
 @Component({
   selector: 'app-manage',
@@ -12,13 +13,14 @@ import {Period, Transaction} from '../model/transaction';
 })
 export class ManageComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['title', 'category', 'period', 'value', 'remove'];
+  displayedColumns = ['title', 'category', 'period', 'value', 'income', 'remove'];
   dataSource: MatTableDataSource<Transaction>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dialog: MatDialog) {
+  constructor(public toastr: ToastsManager, vsc: ViewContainerRef, private dialog: MatDialog) {
+    this.toastr.setRootViewContainerRef(vsc);
     // Create 100 users
     const users: Transaction[] = [];
     for (let i = 1; i <= 1; i++) {
@@ -27,6 +29,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
       transaction.category = 'Cat';
       transaction.period = Period.Monthly;
       transaction.value = i;
+      transaction.isIncome = true;
       users.push(transaction);
     }
 
@@ -61,15 +64,40 @@ export class ManageComponent implements OnInit, AfterViewInit {
         a.category = newTransaction.category;
         a.period = <Period>Period[newTransaction.period];
         a.value = +newTransaction.value;
+        a.isIncome = !!newTransaction.isIncome;
+        console.log(a);
         let data = this.dataSource.data;
         data.push(a);
         this.dataSource = new MatTableDataSource(data);
+        this.toastr.success('Transaction added');
       });
   }
 
   removeTransaction(row) {
-    const news = this.dataSource.data.filter(trans => trans.title !== row.title);
-    this.dataSource.data = news;
+    const filtered = this.dataSource.data.filter(trans => trans.title !== row.title);
+    this.dataSource.data = filtered;
+    this.toastr.success('Transaction removed!');
+  }
+
+  // TODO Export transactions to JSON, currently unused
+  exportJson(): void {
+    console.log('Exporting: ' + this.dataSource.data)
+    const c = JSON.stringify(this.dataSource.data);
+    const file = new Blob([c], {type: 'text/json'});
+    this.download(file, 'transactions.json');
+  }
+
+  download(blob, filename): void {
+    const a = document.createElement('a'),
+      url = URL.createObjectURL(blob);
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 0);
   }
 
 }
