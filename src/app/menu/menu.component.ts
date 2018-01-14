@@ -9,7 +9,7 @@ import {routerTransition} from '../routing/router-transitions';
 })
 export class MenuComponent {
 
-  isDarkTheme = false
+  isDarkTheme = false;
 
 }
 

@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogComponent} from '../dialog/dialog.component';
 import {routerTransition} from '../routing/router-transitions';
 import {Period, Transaction} from '../model/transaction';
-import {ToastsManager} from 'ng2-toastr';
 
 @Component({
   selector: 'app-manage',
@@ -16,12 +15,13 @@ export class ManageComponent implements OnInit, AfterViewInit {
   displayedColumns = ['title', 'category', 'period', 'value', 'income', 'remove'];
   dataSource: MatTableDataSource<Transaction>;
 
+  snackBarConfig: MatSnackBarConfig;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public toastr: ToastsManager, vsc: ViewContainerRef, private dialog: MatDialog) {
-    this.toastr.setRootViewContainerRef(vsc);
-    // Create 100 users
+  constructor(private dialog: MatDialog,
+              public snackBar: MatSnackBar) {
     const users: Transaction[] = [];
     for (let i = 1; i <= 1; i++) {
       const transaction = new Transaction();
@@ -38,6 +38,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.snackBarConfig = new MatSnackBarConfig();
+    this.snackBarConfig.duration = 1500;
   }
 
   /**
@@ -59,29 +61,29 @@ export class ManageComponent implements OnInit, AfterViewInit {
     this.dialog.open(DialogComponent).afterClosed()
       .filter(result => !!result)
       .subscribe(newTransaction => {
-        let a = new Transaction();
-        a.title = newTransaction.title;
-        a.category = newTransaction.category;
-        a.period = <Period>Period[newTransaction.period];
-        a.value = +newTransaction.value;
-        a.isIncome = !!newTransaction.isIncome;
-        console.log(a);
+        const trans = new Transaction();
+        trans.title = newTransaction.title;
+        trans.category = newTransaction.category;
+        trans.period = <Period>Period[newTransaction.period];
+        trans.value = +newTransaction.value;
+        trans.isIncome = !!newTransaction.isIncome;
+        console.log(trans);
         let data = this.dataSource.data;
-        data.push(a);
+        data.push(trans);
         this.dataSource = new MatTableDataSource(data);
-        this.toastr.success('Transaction added');
+        this.snackBar.open('Transaction added', undefined, this.snackBarConfig);
       });
   }
 
   removeTransaction(row) {
     const filtered = this.dataSource.data.filter(trans => trans.title !== row.title);
     this.dataSource.data = filtered;
-    this.toastr.success('Transaction removed!');
+    this.snackBar.open('Transaction removed', undefined, this.snackBarConfig);
   }
 
   // TODO Export transactions to JSON, currently unused
   exportJson(): void {
-    console.log('Exporting: ' + this.dataSource.data)
+    console.log('Exporting: ' + this.dataSource.data);
     const c = JSON.stringify(this.dataSource.data);
     const file = new Blob([c], {type: 'text/json'});
     this.download(file, 'transactions.json');
@@ -94,7 +96,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-    setTimeout(function() {
+    setTimeout(function () {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     }, 0);
