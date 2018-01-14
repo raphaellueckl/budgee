@@ -13,6 +13,7 @@ import {OverviewComponent} from './overview/overview.component';
 import {MenuComponent} from './menu/menu.component';
 import {ManageComponent} from './manage/manage.component';
 import {RoutingModule} from './routing/routing.module';
+import {DataAccessService} from './data-access.service';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import {RoutingModule} from './routing/routing.module';
     MaterialModule,
     RoutingModule
   ],
-  providers: [],
+  providers: [
+    DataAccessService
+  ],
   entryComponents: [
     DialogComponent
   ],

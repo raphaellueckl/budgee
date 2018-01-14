@@ -3,6 +3,7 @@ import {MatDialog, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTab
 import {DialogComponent} from '../dialog/dialog.component';
 import {routerTransition} from '../routing/router-transitions';
 import {Period, Transaction} from '../model/transaction';
+import {DataAccessService} from '../data-access.service';
 
 @Component({
   selector: 'app-manage',
@@ -21,7 +22,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dialog: MatDialog,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              private sharedData: DataAccessService) {
     const users: Transaction[] = [];
     for (let i = 1; i <= 1; i++) {
       const transaction = new Transaction();
@@ -33,13 +35,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
       users.push(transaction);
     }
 
-    // Assign the data to the data source for the table to render
+    // Assign the sharedData to the sharedData source for the table to render
     this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit() {
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.duration = 1500;
+    this.sharedData.currentTransactions().subscribe((trans: Transaction[]) => this.dataSource.data = trans);
   }
 
   /**
@@ -71,6 +74,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         let data = this.dataSource.data;
         data.push(trans);
         this.dataSource = new MatTableDataSource(data);
+        this.sharedData.setCurrentTransactions(this.dataSource.data);
         this.snackBar.open('Transaction added', undefined, this.snackBarConfig);
       });
   }
@@ -79,6 +83,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     const filtered = this.dataSource.data.filter(trans => trans.title !== row.title);
     this.dataSource.data = filtered;
     this.snackBar.open('Transaction removed', undefined, this.snackBarConfig);
+    this.sharedData.setCurrentTransactions(this.dataSource.data);
   }
 
   // TODO Export transactions to JSON, currently unused
