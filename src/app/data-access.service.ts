@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class DataAccessService {
 
-  private messageSource = new BehaviorSubject<Transaction[]>([]);
+  private transactions: Transaction[] = [];
+  private messageSource = new BehaviorSubject<Transaction[]>(this.transactions);
   private currentTrans = this.messageSource.asObservable();
 
   constructor() {
@@ -16,8 +17,14 @@ export class DataAccessService {
     return this.currentTrans;
   }
 
-  setCurrentTransactions(transactions: Transaction[]) {
-    this.messageSource.next(transactions);
+  addTransaction(t: Transaction) {
+    this.transactions.push(t);
+    this.messageSource.next(this.transactions);
+  }
+
+  removeTransaction(transaction: Transaction) {
+    this.transactions = this.transactions.filter((t: Transaction) => t.title !== transaction.title);
+    this.messageSource.next(this.transactions);
   }
 
 }

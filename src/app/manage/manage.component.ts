@@ -24,7 +24,19 @@ export class ManageComponent implements OnInit, AfterViewInit {
   constructor(private dialog: MatDialog,
               public snackBar: MatSnackBar,
               private sharedData: DataAccessService) {
-    const mockTransactions: Transaction[] = [];
+  }
+
+  ngOnInit() {
+    this.snackBarConfig = new MatSnackBarConfig();
+    this.snackBarConfig.duration = 1500;
+
+    this.sharedData.currentTransactions().subscribe((t: Transaction[]) => {
+      this.dataSource = new MatTableDataSource(t);
+    });
+    this.useMockData();
+  }
+
+  useMockData() {
     for (let i = 1; i <= 1; i++) {
       const transaction = new Transaction();
       transaction.title = `Hans ${i}`;
@@ -32,17 +44,8 @@ export class ManageComponent implements OnInit, AfterViewInit {
       transaction.period = Period.Monthly;
       transaction.value = i;
       transaction.isIncome = true;
-      mockTransactions.push(transaction);
+      this.sharedData.addTransaction(transaction);
     }
-
-    // Assign the sharedData to the sharedData source for the table to render
-    this.dataSource = new MatTableDataSource(mockTransactions);
-  }
-
-  ngOnInit() {
-    this.snackBarConfig = new MatSnackBarConfig();
-    this.snackBarConfig.duration = 1500;
-    this.sharedData.currentTransactions().subscribe((trans: Transaction[]) => this.dataSource.data = trans);
   }
 
   /**
@@ -63,27 +66,17 @@ export class ManageComponent implements OnInit, AfterViewInit {
   addNewTransactionDialog() {
     this.dialog.open(DialogComponent).afterClosed()
       .filter(result => !!result)
-      .subscribe(newTransaction => {
-        const trans = new Transaction();
-        trans.title = newTransaction.title;
-        trans.category = newTransaction.category;
-        trans.period = <Period>Period[newTransaction.period];
-        trans.value = +newTransaction.value;
-        trans.isIncome = !!newTransaction.isIncome;
-        console.log(trans);
-        let data = this.dataSource.data;
-        data.push(trans);
-        this.dataSource = new MatTableDataSource(data);
-        this.sharedData.setCurrentTransactions(this.dataSource.data);
+      .subscribe(t => {
+        const newTransaction = this.convertToTransaction(t);
+        this.sharedData.addTransaction(newTransaction);
         this.snackBar.open('Transaction added', undefined, this.snackBarConfig);
       });
   }
 
   removeTransaction(row) {
-    const filtered = this.dataSource.data.filter(trans => trans.title !== row.title);
-    this.dataSource.data = filtered;
+    const filtered: Transaction = this.dataSource.data.filter((trans: Transaction) => trans.title === row.title).shift();
     this.snackBar.open('Transaction removed', undefined, this.snackBarConfig);
-    this.sharedData.setCurrentTransactions(this.dataSource.data);
+    this.sharedData.removeTransaction(filtered);
   }
 
   // TODO Export transactions to JSON, currently unused
@@ -94,7 +87,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
     this.download(file, 'transactions.json');
   }
 
-  download(blob, filename): void {
+  private download(blob, filename): void {
     const a = document.createElement('a'),
       url = URL.createObjectURL(blob);
     a.href = url;
@@ -107,11 +100,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
-}
+  private convertToTransaction(newTransaction) {
+    const trans = new Transaction();
+    trans.title = newTransaction.title;
+    trans.category = newTransaction.category;
+    trans.period = <Period>Period[newTransaction.period];
+    trans.value = +newTransaction.value;
+    trans.isIncome = !!newTransaction.isIncome;
+    return trans;
+  }
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
 }
