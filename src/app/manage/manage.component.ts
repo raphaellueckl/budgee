@@ -24,7 +24,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
   constructor(private dialog: MatDialog,
               public snackBar: MatSnackBar,
               private sharedData: DataAccessService) {
-    const users: Transaction[] = [];
+    const mockTransactions: Transaction[] = [];
     for (let i = 1; i <= 1; i++) {
       const transaction = new Transaction();
       transaction.title = `Hans ${i}`;
@@ -32,11 +32,11 @@ export class ManageComponent implements OnInit, AfterViewInit {
       transaction.period = Period.Monthly;
       transaction.value = i;
       transaction.isIncome = true;
-      users.push(transaction);
+      mockTransactions.push(transaction);
     }
 
     // Assign the sharedData to the sharedData source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(mockTransactions);
   }
 
   ngOnInit() {
