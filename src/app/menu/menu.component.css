@@ -1,13 +1,13 @@
-:host {
-  display: flex;
-  flex: 1;
-}
-
-/*mat-sidenav {*/
-  /*width: 320px;*/
+/*:host {*/
+  /*display: flex;*/
+  /*flex: 1;*/
 /*}*/
 
-.content {
-  padding: 12px;
-}
+/*!*mat-sidenav {*!*/
+  /*!*width: 320px;*!*/
+/*!*}*!*/
+
+/*.content {*/
+  /*padding: 12px;*/
+/*}*/
 
