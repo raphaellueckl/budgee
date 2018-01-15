@@ -14,6 +14,9 @@ import {MenuComponent} from './menu/menu.component';
 import {ManageComponent} from './manage/manage.component';
 import {RoutingModule} from './routing/routing.module';
 import {DataAccessService} from './data-access.service';
+import {PieComponent} from './pie/pie.component';
+import {SumPipe} from './_pipes/sum.pipe';
+import {PieDataService} from './pie-data.service';
 
 
 @NgModule({
@@ -23,7 +26,9 @@ import {DataAccessService} from './data-access.service';
     TransactionsComponent,
     OverviewComponent,
     MenuComponent,
-    ManageComponent
+    ManageComponent,
+    PieComponent,
+    SumPipe
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import {DataAccessService} from './data-access.service';
     RoutingModule
   ],
   providers: [
-    DataAccessService
+    DataAccessService,
+    PieDataService
   ],
   entryComponents: [
     DialogComponent
