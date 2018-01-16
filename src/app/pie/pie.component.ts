@@ -192,9 +192,4 @@ export class PieComponent implements OnInit, OnChanges {
     setTimeout(() => this.updateChart(false), 50);
   }
 
-  ngOnChanges() {
-    // update chart on data input value change
-    if (this.svg) this.updateChart(false);
-  }
-
 }

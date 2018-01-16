@@ -25,6 +25,11 @@ export class DataAccessService {
     this.messageSource.next(this.transactions);
   }
 
+  setTransactions(t: Transaction[]) {
+    this.transactions = t;
+    this.messageSource.next(this.transactions);
+  }
+
   removeTransaction(transaction: Transaction) {
     this.transactions = this.transactions.filter((t: Transaction) => t.title !== transaction.title);
     this.messageSource.next(this.transactions);

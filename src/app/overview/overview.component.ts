@@ -36,10 +36,10 @@ export class OverviewComponent implements OnInit {
 
     // const types = ['SnmpV1', 'SnmpV2c', 'SnmpV3', 'HttpApi', 'HttpBasic', 'SshBasic', 'SshRsa', 'Wmi', 'Sql', 'MongoDb'];
 
-    for (let i = 0; i < Math.floor(1 + Math.random() * num); i++) {
+    for (let i = 0; i < this.labels.length; i++) {
       const operation = {
         id: i,
-        familyType: this.labels[Math.floor(Math.random() * this.labels.length)],
+        familyType: this.labels[i],
         name: 'MAN1-APC-01-Get-Power-Consumption',
         // type: types[Math.floor(Math.random() * types.length)]
       };
@@ -51,8 +51,8 @@ export class OverviewComponent implements OnInit {
   }
 
   private loadData() {
-    // this.labels = this.transactions.map(t => t.category);
-    this.labels = ['Devices', 'Database', 'API'];
+    this.labels = this.transactions.map(t => t.category);
+    // this.labels = ['Devices', 'Database', 'API'];
   }
 
 }

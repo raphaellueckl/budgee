@@ -37,15 +37,17 @@ export class ManageComponent implements OnInit, AfterViewInit {
   }
 
   useMockData() {
-    for (let i = 1; i <= 1; i++) {
-      const transaction = new Transaction();
-      transaction.title = `Hans ${i}`;
-      transaction.category = 'Cat';
-      transaction.period = Period.Monthly;
-      transaction.value = i;
-      transaction.isIncome = true;
-      this.sharedData.addTransaction(transaction);
+    const transactions = [];
+    for (let i = 1; i <= 7; i++) {
+      const t = new Transaction();
+      t.title = `Hans ${i}`;
+      t.category = 'Cat ' + i;
+      t.period = Period.Monthly;
+      t.value = i;
+      t.isIncome = true;
+      transactions.push(t);
     }
+    this.sharedData.setTransactions(transactions);
   }
 
   /**
