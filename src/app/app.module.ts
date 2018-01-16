@@ -16,7 +16,6 @@ import {RoutingModule} from './routing/routing.module';
 import {DataAccessService} from './data-access.service';
 import {PieComponent} from './pie/pie.component';
 import {SumPipe} from './_pipes/sum.pipe';
-import {PieDataService} from './pie-data.service';
 
 
 @NgModule({
@@ -42,7 +41,6 @@ import {PieDataService} from './pie-data.service';
   ],
   providers: [
     DataAccessService,
-    PieDataService
   ],
   entryComponents: [
     DialogComponent
