@@ -8,13 +8,16 @@ export class DataAccessService {
 
   private transactions: Transaction[] = [];
   private messageSource = new BehaviorSubject<Transaction[]>(this.transactions);
-  private currentTrans = this.messageSource.asObservable();
 
   constructor() {
   }
 
-  currentTransactions(): Observable<Transaction[]> {
-    return this.currentTrans;
+  currentTransactions(): Transaction[] {
+    return this.transactions;
+  }
+
+  transactionListener(): Observable<Transaction[]> {
+    return this.messageSource.asObservable();
   }
 
   addTransaction(t: Transaction) {

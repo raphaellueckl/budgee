@@ -13,12 +13,7 @@ export class OverviewComponent implements OnInit {
 
   transactions: Transaction[];
 
-  // constructor(private sharedData: DataAccessService) { }
-  //
-  // ngOnInit() {
-  //   this.sharedData.currentTransactions().subscribe((trans: Transaction[]) => this.transactions = trans);
-  //   console.log(this.transactions);
-  // }
+  labels;
 
   data: Array<any>;
   colours = ['#57A1C6', '#4FC3F7', '#36D7B7'];
@@ -28,26 +23,24 @@ export class OverviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sharedData.currentTransactions().subscribe((trans: Transaction[]) => this.transactions = trans);
+    this.transactions = this.sharedData.currentTransactions();
     console.log(this.transactions);
 
-
+    this.loadData();
     this.data = this.generateData(30);
-    // this.data = this.pieDataService.generateData(30);
-    // setInterval(() => {
-    //   this.data = this.pieDataService.generateData(30);
-    // }, 4000);
+
   }
 
   generateData(num: number) {
     const operations = [];
-    const labels = ['Devices', 'Database', 'API'];
+    // const labels = ['Devices', 'Database', 'API']; //categories
+
     const types = ['SnmpV1', 'SnmpV2c', 'SnmpV3', 'HttpApi', 'HttpBasic', 'SshBasic', 'SshRsa', 'Wmi', 'Sql', 'MongoDb'];
 
     for (let i = 0; i < Math.floor(1 + Math.random() * num); i++) {
       const operation = {
         id: i,
-        familyType: labels[Math.floor(Math.random() * labels.length)],
+        familyType: this.labels[Math.floor(Math.random() * this.labels.length)],
         name: 'MAN1-APC-01-Get-Power-Consumption',
         type: types[Math.floor(Math.random() * types.length)]
       };
@@ -56,6 +49,10 @@ export class OverviewComponent implements OnInit {
     }
 
     return operations;
+  }
+
+  private loadData() {
+    this.labels = this.transactions.map(t => t.category);
   }
 
 }
