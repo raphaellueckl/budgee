@@ -7,22 +7,4 @@
       <div>{{label}}</div>
     </div>
   </div>
-
-  <div class='tooltip drilldownData'>
-    <div class='header' *ngIf='selectedSlice'>
-      <div fxLayout='row' fxLayoutAlign='start center'>
-        <img [src]='"assets/Icon-" + selectedSlice.familyType + ".svg"' alt='Database Icon'>
-        <div fxLayout='column' fxLayoutAlign='center start'>
-          <div class='title'>{{selectedSlice.familyType}}</div>
-          <div>Queries</div>
-        </div>
-      </div>
-    </div>
-    <div class='body' fxLayout='row' fxLayoutWrap *ngIf='selectedSlice'>
-      <div *ngFor='let item of selectedSlice.types' class='item' fxFlex="50%">
-        <div class='label'>{{item.type}}</div>
-        <div class='value'>{{item.amount}}</div>
-      </div>
-    </div>
-  </div>
 </div>

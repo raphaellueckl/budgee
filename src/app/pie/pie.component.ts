@@ -69,7 +69,7 @@ export class PieComponent implements OnInit, OnChanges {
       .attr('viewBox', '0, 0, ' + this.hostElement.offsetWidth + ', ' + this.hostElement.offsetHeight)
       .append('g')
       .attr('transform', `translate(${this.hostElement.offsetWidth / 2}, ${this.hostElement.offsetHeight / 2})`);
-  }
+  };
 
   updateChart = (firstRun: boolean) => {
     const vm = this;
@@ -108,7 +108,7 @@ export class PieComponent implements OnInit, OnChanges {
       .attrTween('d', function(newValues, i){
         return vm.arcTween(newValues, i, this);
       });
-  }
+  };
 
   arcTween(newValues, i, slice) {
     const interpolation = d3.interpolate(slice.storedValues, newValues);
@@ -139,13 +139,7 @@ export class PieComponent implements OnInit, OnChanges {
       .attr('class', 'percent')
       .attr('fill', '#57a1c6')
       .text(this.toPercent(this.values[i], new SumPipe().transform(this.values)));
-
-    // Tooltip
-    this.tooltip.style.visibility = 'visible';
-    this.tooltip.style.opacity = 0.9;
-    this.tooltip.style.top = (d3.event.pageY) + 'px';
-    this.tooltip.style.left = (d3.event.pageX - 100 ) + 'px';
-  }
+  };
 
   mouseout = () => {
     this.svg.select('.label').remove();
@@ -154,14 +148,11 @@ export class PieComponent implements OnInit, OnChanges {
     d3.select(d3.event.currentTarget).transition()
       .duration(100)
       .attr('d', this.arcGenerator);
-
-    this.tooltip.style.visibility = 'hidden';
-    this.tooltip.style.opacity = 0;
-  }
+  };
 
   toPercent = (a: number, b: number): string => {
     return Math.round( a / b * 100) + '%';
-  }
+  };
 
   updateSlices = (newData: Array<any>): Array<any> => {
     const queriesByFamilyTypes = _.groupBy(_.sortBy(newData, 'familyType'), 'familyType');
@@ -188,7 +179,7 @@ export class PieComponent implements OnInit, OnChanges {
     });
 
     return results;
-  }
+  };
 
   ngOnInit() {
     // create chart and render

@@ -12,7 +12,6 @@ import {Transaction} from '../model/transaction';
 export class OverviewComponent implements OnInit {
 
   transactions: Transaction[];
-
   labels;
 
   data: Array<any>;
@@ -35,14 +34,14 @@ export class OverviewComponent implements OnInit {
     const operations = [];
     // const labels = ['Devices', 'Database', 'API']; //categories
 
-    const types = ['SnmpV1', 'SnmpV2c', 'SnmpV3', 'HttpApi', 'HttpBasic', 'SshBasic', 'SshRsa', 'Wmi', 'Sql', 'MongoDb'];
+    // const types = ['SnmpV1', 'SnmpV2c', 'SnmpV3', 'HttpApi', 'HttpBasic', 'SshBasic', 'SshRsa', 'Wmi', 'Sql', 'MongoDb'];
 
     for (let i = 0; i < Math.floor(1 + Math.random() * num); i++) {
       const operation = {
         id: i,
         familyType: this.labels[Math.floor(Math.random() * this.labels.length)],
         name: 'MAN1-APC-01-Get-Power-Consumption',
-        type: types[Math.floor(Math.random() * types.length)]
+        // type: types[Math.floor(Math.random() * types.length)]
       };
 
       operations.push(operation);
@@ -52,7 +51,8 @@ export class OverviewComponent implements OnInit {
   }
 
   private loadData() {
-    this.labels = this.transactions.map(t => t.category);
+    // this.labels = this.transactions.map(t => t.category);
+    this.labels = ['Devices', 'Database', 'API'];
   }
 
 }
