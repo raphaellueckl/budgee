@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import {SumPipe} from '../_pipes/sum.pipe';
 import * as _ from 'underscore';
@@ -8,7 +8,7 @@ import * as _ from 'underscore';
   styleUrls: ['./pie.component.scss'],
   templateUrl: 'pie.component.html'
 })
-export class PieComponent implements OnInit, OnChanges {
+export class PieComponent implements OnInit {
 
   @ViewChild('containerPieChart') chartContainer: ElementRef;
   @Input() data: any;

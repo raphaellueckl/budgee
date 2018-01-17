@@ -1,27 +1,28 @@
 @import '../../theme.scss';
 
-.wrapper {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-}
+//.wrapper {
+//  display: inline-block;
+//  position: relative;
+//  width: 100%;
+//}
 
 .pie-chart {
-  width: 100%;
+  //width: 100%;
   height: 400px !important;
 
   /deep/ path {
     stroke: #fff;
+    stroke-opacity: 0.3;
     stroke-width: 2;
   }
 
-  /deep/ .label {
-    font-size: 1.2em;
-  }
+  ///deep/ .label {
+  //  font-size: 1.2em;
+  //}
 
-  /deep/ .percent {
-    font-size: 2em;
-  }
+  ///deep/ .percent {
+  //  font-size: 2em;
+  //}
 }
 
 .legend {
@@ -39,48 +40,14 @@
   }
 }
 
-.tooltip {
-  width: 250px;
-  position: fixed;
-  background: #f5f6f5;
-  pointer-events: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
-  visibility: hidden;
+.container {
+  //display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-  .header {
-    border-bottom: 1px solid $border-color;
-    padding: 20px;
+.flex-item {
 
-    img {
-      margin-right: 10px;
-    }
-
-    .title {
-      font-size: 1.2em;
-      margin-bottom: 3px;
-      font-weight: bold;
-      color: $primary;
-    }
-  }
-
-  .body {
-    padding: 20px;
-
-    .item {
-      padding: 10px 0;
-
-      .label {
-        font-weight: bold;
-        padding-bottom: 2px;
-        color: $primary;
-        filter: brightness(90%);
-      }
-
-      .value {
-        color: black;
-      }
-    }
-  }
 }
