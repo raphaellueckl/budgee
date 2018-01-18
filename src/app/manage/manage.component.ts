@@ -33,21 +33,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
     this.sharedData.transactionListener().subscribe((t: Transaction[]) => {
       this.dataSource = new MatTableDataSource(t);
     });
-    this.useMockData();
-  }
-
-  useMockData() {
-    const transactions = [];
-    for (let i = 1; i <= 7; i++) {
-      const t = new Transaction();
-      t.title = `Hans ${i}`;
-      t.category = 'Cat ' + i;
-      t.period = Period.Monthly;
-      t.value = i;
-      t.isIncome = true;
-      transactions.push(t);
-    }
-    this.sharedData.setTransactions(transactions);
   }
 
   /**
