@@ -38,10 +38,7 @@ export class OverviewComponent implements OnInit {
 
     for (let i = 0; i < this.labels.length; i++) {
       const operation = {
-        id: i,
-        familyType: this.labels[i],
-        name: 'MAN1-APC-01-Get-Power-Consumption',
-        // type: types[Math.floor(Math.random() * types.length)]
+        category: this.labels[i],
       };
 
       operations.push(operation);

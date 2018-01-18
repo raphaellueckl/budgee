@@ -17,23 +17,17 @@ export class PieComponent implements OnInit {
   hostElement: any;
   svg: any;
   radius: number;
-  innerRadius: number;
-  outerRadius: number;
-  htmlElement: HTMLElement;
   arcGenerator: any;
   arcHover: any;
   pieGenerator: any;
   path: any;
   values: Array<number>;
   labels: Array<string>;
-  tooltip: any;
-  centralLabel: any;
   pieColours: any;
   slices: Array<any>;
   selectedSlice: any;
   colourSlices: Array<string>;
   arc: any;
-  arcEnter: any;
 
   constructor(
     private elRef: ElementRef
@@ -48,7 +42,6 @@ export class PieComponent implements OnInit {
     const outerRadius = this.radius - 15;
     const hoverRadius = this.radius - 5;
     this.pieColours = this.colours ? d3.scaleOrdinal().range(this.colours) : d3.scaleOrdinal(d3.schemeCategory20c);
-    this.tooltip = this.elRef.nativeElement.querySelector('.tooltip');
 
     // create a pie generator and tell it where to get numeric values from and whether sorting is needed or not
     // this is just a function that will be called to obtain data prior binding that data to elements of the chart
@@ -75,8 +68,8 @@ export class PieComponent implements OnInit {
     const vm = this;
 
     this.slices = this.updateSlices(this.data);
-    this.labels = this.slices.map(slice => slice.familyType);
-    this.colourSlices = this.slices.map(slice => this.pieColours(slice.familyType));
+    this.labels = this.slices.map(slice => slice.category);
+    this.colourSlices = this.slices.map(slice => this.pieColours(slice.category));
 
     this.values = firstRun ? [0, 0, 0] : _.toArray(this.slices).map(slice => slice.amount);
 
@@ -155,26 +148,13 @@ export class PieComponent implements OnInit {
   };
 
   updateSlices = (newData: Array<any>): Array<any> => {
-    const queriesByFamilyTypes = _.groupBy(_.sortBy(newData, 'familyType'), 'familyType');
+    const queriesByCategories = _.groupBy(_.sortBy(newData, 'category'), 'category');
     const results = [];
 
-    Object.keys(queriesByFamilyTypes).map((familyType) => {
+    Object.keys(queriesByCategories).map((category) => {
       results.push({
-        familyType: familyType,
-        amount: queriesByFamilyTypes[familyType].length,
-        types: []
-      });
-    });
-
-    results.map(result => {
-      const queries = newData.filter(query => query.familyType === result.familyType);
-      const queriesByTypes = _.groupBy(_.sortBy(queries, 'type'), 'type');
-
-      Object.keys(queriesByTypes).map((type) => {
-        result.types.push({
-          type: type,
-          amount: queriesByTypes[type].length,
-        });
+        category: category,
+        amount: queriesByCategories[category].length,
       });
     });
 
