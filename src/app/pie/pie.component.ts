@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import {SumPipe} from '../_pipes/sum.pipe';
 import * as _ from 'underscore';
+import {Transaction} from '../model/transaction';
 
 @Component({
   selector: 'app-pie-chart',
@@ -11,8 +12,8 @@ import * as _ from 'underscore';
 export class PieComponent implements OnInit {
 
   @ViewChild('containerPieChart') chartContainer: ElementRef;
-  @Input() data: any;
-  @Input() colours: Array<string>;
+  @Input() data: Transaction[];
+  @Input() colours: string[];
 
   hostElement: any;
   svg: any;
@@ -28,10 +29,6 @@ export class PieComponent implements OnInit {
   selectedSlice: any;
   colourSlices: Array<string>;
   arc: any;
-
-  constructor(
-    private elRef: ElementRef
-  ) {}
 
   createChart = () => {
     // chart configuration
@@ -71,7 +68,7 @@ export class PieComponent implements OnInit {
     this.labels = this.slices.map(slice => slice.category);
     this.colourSlices = this.slices.map(slice => this.pieColours(slice.category));
 
-    this.values = firstRun ? [0, 0, 0] : _.toArray(this.slices).map(slice => slice.amount);
+    this.values = firstRun ? [0, 0, 0] : _.toArray(this.slices).map(slice => slice.value);
 
     this.pieGenerator = d3.pie().sort(null).value((d: number) => d)(this.values);
 
@@ -154,7 +151,7 @@ export class PieComponent implements OnInit {
     Object.keys(queriesByCategories).map((category) => {
       results.push({
         category: category,
-        amount: queriesByCategories[category].length,
+        value: queriesByCategories[category].length,
       });
     });
 
