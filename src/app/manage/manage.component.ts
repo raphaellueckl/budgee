@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
-import {DialogComponent} from '../dialog/dialog.component';
+import {AddTransactionDialogComponent} from '../add-transaction-dialog/add-transaction-dialog.component';
 import {routerTransition} from '../routing/router-transitions';
 import {Period, Transaction} from '../model/transaction';
 import {DataAccessService} from '../data-access.service';
@@ -51,7 +51,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
   }
 
   addNewTransactionDialog() {
-    this.dialog.open(DialogComponent).afterClosed()
+    this.dialog.open(AddTransactionDialogComponent).afterClosed()
       .filter(result => !!result)
       .subscribe(t => {
         const newTransaction = this.convertToTransaction(t);

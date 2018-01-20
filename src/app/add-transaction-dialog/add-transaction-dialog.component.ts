@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
-import {Period, Transaction} from '../model/transaction';
+import {Period} from '../model/transaction';
 
 @Component({
-  templateUrl: 'dialog.component.html'
+  templateUrl: 'add-transaction-dialog.component.html'
 })
-export class DialogComponent {
+export class AddTransactionDialogComponent {
 
   periods = [Period.Daily, Period.Weekly, Period.Quarter, Period.Monthly, Period.SixMonths, Period.Yearly];
 
@@ -15,7 +15,7 @@ export class DialogComponent {
   value: number;
   isIncome = false;
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>) {
+  constructor(public dialogRef: MatDialogRef<AddTransactionDialogComponent>) {
   }
 
 }

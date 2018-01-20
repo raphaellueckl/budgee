@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
-import {DialogComponent} from './dialog/dialog.component';
+import {AddTransactionDialogComponent} from './add-transaction-dialog/add-transaction-dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -21,7 +21,7 @@ import {SumPipe} from './_pipes/sum.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,
+    AddTransactionDialogComponent,
     TransactionsComponent,
     OverviewComponent,
     MenuComponent,
@@ -43,7 +43,7 @@ import {SumPipe} from './_pipes/sum.pipe';
     DataAccessService,
   ],
   entryComponents: [
-    DialogComponent
+    AddTransactionDialogComponent
   ],
   bootstrap: [AppComponent]
 })
