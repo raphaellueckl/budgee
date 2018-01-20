@@ -16,6 +16,7 @@ import {RoutingModule} from './routing/routing.module';
 import {DataAccessService} from './data-access.service';
 import {PieComponent} from './pie/pie.component';
 import {SumPipe} from './_pipes/sum.pipe';
+import {DownloadDialogComponent} from './download-dialog/download-dialog.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {SumPipe} from './_pipes/sum.pipe';
     MenuComponent,
     ManageComponent,
     PieComponent,
-    SumPipe
+    SumPipe,
+    DownloadDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import {SumPipe} from './_pipes/sum.pipe';
     DataAccessService,
   ],
   entryComponents: [
-    AddTransactionDialogComponent
+    AddTransactionDialogComponent,
+    DownloadDialogComponent
   ],
   bootstrap: [AppComponent]
 })

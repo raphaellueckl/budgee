@@ -29,10 +29,4 @@ export class OverviewComponent implements OnInit {
 
   }
 
-  // loadData(): Transaction[] {
-  //   // return [new Set(this.transactions.map(t => t.category))];
-  //   return [new Set(this.transactions.map(t => t.category))];
-  //
-  // }
-
 }

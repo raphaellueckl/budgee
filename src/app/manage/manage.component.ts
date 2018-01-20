@@ -4,6 +4,7 @@ import {AddTransactionDialogComponent} from '../add-transaction-dialog/add-trans
 import {routerTransition} from '../routing/router-transitions';
 import {Period, Transaction} from '../model/transaction';
 import {DataAccessService} from '../data-access.service';
+import {DownloadDialogComponent} from '../download-dialog/download-dialog.component';
 
 @Component({
   selector: 'app-manage',
@@ -60,21 +61,27 @@ export class ManageComponent implements OnInit, AfterViewInit {
       });
   }
 
+  downloadTransactionsDialog() {
+    this.dialog.open(DownloadDialogComponent).afterClosed()
+      .filter(result => !!result)
+      .subscribe(t => {
+        this.exportJson(this.dataSource.data);
+      });
+  }
+
   removeTransaction(row) {
     const filtered: Transaction = this.dataSource.data.filter((trans: Transaction) => trans.title === row.title).shift();
     this.snackBar.open('Transaction removed', undefined, this.snackBarConfig);
     this.sharedData.removeTransaction(filtered);
   }
 
-  // TODO Export transactions to JSON, currently unused
-  exportJson(): void {
-    console.log('Exporting: ' + this.dataSource.data);
-    const c = JSON.stringify(this.dataSource.data);
+  private exportJson(data: Transaction[]): void {
+    const c = JSON.stringify(data);
     const file = new Blob([c], {type: 'text/json'});
-    this.download(file, 'transactions.json');
+    this.downloadFileWithContent('transactions.json', file);
   }
 
-  private download(blob, filename): void {
+  private downloadFileWithContent(filename, blob): void {
     const a = document.createElement('a'),
       url = URL.createObjectURL(blob);
     a.href = url;
