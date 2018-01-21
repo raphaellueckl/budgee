@@ -44,11 +44,17 @@
 
     </mat-table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
 
   </div>
 
-  <button mat-fab (click)="addNewTransactionDialog()" class="fab-bottom-right">
-    <mat-icon>add</mat-icon>
-  </button>
+  <div class="fab-bottom-right">
+    <button mat-fab (click)="downloadTransactionsDialog()">
+      <mat-icon>file_download</mat-icon>
+    </button>
+
+    <button mat-fab (click)="addNewTransactionDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

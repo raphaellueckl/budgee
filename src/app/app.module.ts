@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
-import {DialogComponent} from './dialog/dialog.component';
+import {AddTransactionDialogComponent} from './add-transaction-dialog/add-transaction-dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,16 +13,23 @@ import {OverviewComponent} from './overview/overview.component';
 import {MenuComponent} from './menu/menu.component';
 import {ManageComponent} from './manage/manage.component';
 import {RoutingModule} from './routing/routing.module';
+import {DataAccessService} from './data-access.service';
+import {PieComponent} from './pie/pie.component';
+import {SumPipe} from './_pipes/sum.pipe';
+import {DownloadDialogComponent} from './download-dialog/download-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,
+    AddTransactionDialogComponent,
     TransactionsComponent,
     OverviewComponent,
     MenuComponent,
-    ManageComponent
+    ManageComponent,
+    PieComponent,
+    SumPipe,
+    DownloadDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +41,12 @@ import {RoutingModule} from './routing/routing.module';
     MaterialModule,
     RoutingModule
   ],
-  providers: [],
+  providers: [
+    DataAccessService,
+  ],
   entryComponents: [
-    DialogComponent
+    AddTransactionDialogComponent,
+    DownloadDialogComponent
   ],
   bootstrap: [AppComponent]
 })

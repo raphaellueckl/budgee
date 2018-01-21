@@ -1,0 +1,23 @@
+<div class="container">
+
+  <div class="row">
+    <span class="flex-item">
+      <div class='pie-chart' #containerPieChart></div>
+    </span>
+  </div>
+
+  <div class="row">
+    <span class="flex-item">
+      <div *ngIf='labels'class='legend' fxLayout='row' fxLayoutAlign='center center'>
+        <div *ngFor='let label of labels; let i = index' fxLayout='row' fxLayoutAlign='start center' class='item'>
+          <div class='circle' [ngStyle]='{"background": colourSlices[i]}'></div>
+          <div>{{label}}</div>
+        </div>
+      </div>
+    </span>
+  </div>
+
+</div>
+
+
+

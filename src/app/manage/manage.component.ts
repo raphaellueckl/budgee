@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
-import {DialogComponent} from '../dialog/dialog.component';
+import {AddTransactionDialogComponent} from '../add-transaction-dialog/add-transaction-dialog.component';
 import {routerTransition} from '../routing/router-transitions';
 import {Period, Transaction} from '../model/transaction';
+import {DataAccessService} from '../data-access.service';
+import {DownloadDialogComponent} from '../download-dialog/download-dialog.component';
 
 @Component({
   selector: 'app-manage',
@@ -21,25 +23,17 @@ export class ManageComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dialog: MatDialog,
-              public snackBar: MatSnackBar) {
-    const users: Transaction[] = [];
-    for (let i = 1; i <= 1; i++) {
-      const transaction = new Transaction();
-      transaction.title = `Hans ${i}`;
-      transaction.category = 'Cat';
-      transaction.period = Period.Monthly;
-      transaction.value = i;
-      transaction.isIncome = true;
-      users.push(transaction);
-    }
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+              public snackBar: MatSnackBar,
+              private sharedData: DataAccessService) {
   }
 
   ngOnInit() {
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.duration = 1500;
+
+    this.sharedData.transactionListener().subscribe((t: Transaction[]) => {
+      this.dataSource = new MatTableDataSource(t);
+    });
   }
 
   /**
@@ -58,38 +52,36 @@ export class ManageComponent implements OnInit, AfterViewInit {
   }
 
   addNewTransactionDialog() {
-    this.dialog.open(DialogComponent).afterClosed()
+    this.dialog.open(AddTransactionDialogComponent).afterClosed()
       .filter(result => !!result)
-      .subscribe(newTransaction => {
-        const trans = new Transaction();
-        trans.title = newTransaction.title;
-        trans.category = newTransaction.category;
-        trans.period = <Period>Period[newTransaction.period];
-        trans.value = +newTransaction.value;
-        trans.isIncome = !!newTransaction.isIncome;
-        console.log(trans);
-        let data = this.dataSource.data;
-        data.push(trans);
-        this.dataSource = new MatTableDataSource(data);
+      .subscribe(t => {
+        const newTransaction = this.convertToTransaction(t);
+        this.sharedData.addTransaction(newTransaction);
         this.snackBar.open('Transaction added', undefined, this.snackBarConfig);
       });
   }
 
+  downloadTransactionsDialog() {
+    this.dialog.open(DownloadDialogComponent).afterClosed()
+      .filter(result => !!result)
+      .subscribe(t => {
+        this.exportJson(this.dataSource.data);
+      });
+  }
+
   removeTransaction(row) {
-    const filtered = this.dataSource.data.filter(trans => trans.title !== row.title);
-    this.dataSource.data = filtered;
+    const filtered: Transaction = this.dataSource.data.filter((trans: Transaction) => trans.title === row.title).shift();
     this.snackBar.open('Transaction removed', undefined, this.snackBarConfig);
+    this.sharedData.removeTransaction(filtered);
   }
 
-  // TODO Export transactions to JSON, currently unused
-  exportJson(): void {
-    console.log('Exporting: ' + this.dataSource.data);
-    const c = JSON.stringify(this.dataSource.data);
+  private exportJson(data: Transaction[]): void {
+    const c = JSON.stringify(data);
     const file = new Blob([c], {type: 'text/json'});
-    this.download(file, 'transactions.json');
+    this.downloadFileWithContent('transactions.json', file);
   }
 
-  download(blob, filename): void {
+  private downloadFileWithContent(filename, blob): void {
     const a = document.createElement('a'),
       url = URL.createObjectURL(blob);
     a.href = url;
@@ -102,11 +94,14 @@ export class ManageComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
-}
+  private convertToTransaction(newTransaction) {
+    const trans = new Transaction();
+    trans.title = newTransaction.title;
+    trans.category = newTransaction.category;
+    trans.period = <Period>Period[newTransaction.period];
+    trans.value = +newTransaction.value;
+    trans.isIncome = !!newTransaction.isIncome;
+    return trans;
+  }
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
 }
