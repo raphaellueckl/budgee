@@ -17,6 +17,7 @@ import {DataAccessService} from './data-access.service';
 import {PieComponent} from './pie/pie.component';
 import {SumPipe} from './_pipes/sum.pipe';
 import {DownloadDialogComponent} from './download-dialog/download-dialog.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {DownloadDialogComponent} from './download-dialog/download-dialog.compone
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
 
+    FlexLayoutModule,
     MaterialModule,
     RoutingModule
   ],

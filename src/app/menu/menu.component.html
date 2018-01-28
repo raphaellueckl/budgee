@@ -1,36 +1,23 @@
-<div [class.dark-theme]="isDarkTheme">
+<div [class.dark-theme]="isDarkTheme" fxFlex>
 
-  <mat-toolbar color="primary">
-    <!--<mat-toolbar-row>-->
-      <span>Budgee</span>
-
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="10px">
+    <span>Budgee</span>
     <a [@flyInOut] routerLink="/overview" mat-button>Overview</a>
     <a [@flyInOut] routerLink="/manage" mat-button>Manage</a>
-
-      <!-- Filler that pushes the menu button to the end of the toolbar -->
-      <span></span>
-
-      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    <!--</mat-toolbar-row>-->
+    <span fxFlex></span>
+    <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
   </mat-toolbar>
 
-  <mat-menu #themeMenu x-position="before">
+  <mat-menu #themeMenu>
     <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
   </mat-menu>
 
-  <mat-sidenav-container>
-
-    <div>
-
-      <router-outlet></router-outlet>
-      <!--<app-manage></app-manage>-->
-
-    </div>
-
-  </mat-sidenav-container>
-
-
+  <!--<mat-sidenav-container>-->
+  <!--<div fxLayout="row">-->
+  <router-outlet></router-outlet>
+  <!--</div>-->
+  <!--</mat-sidenav-container>-->
 
 </div>
