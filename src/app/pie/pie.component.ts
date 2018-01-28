@@ -25,7 +25,7 @@ export class PieComponent implements OnInit {
   values: Array<number>;
   labels: Array<string>;
   pieColours: any;
-  slices: Array<any>;
+  slices: Array<Transaction>;
   selectedSlice: any;
   colourSlices: Array<string>;
   arc: any;
@@ -68,7 +68,7 @@ export class PieComponent implements OnInit {
     this.labels = this.slices.map(slice => slice.category);
     this.colourSlices = this.slices.map(slice => this.pieColours(slice.category));
 
-    this.values = firstRun ? [0, 0, 0] : _.toArray(this.slices).map(slice => slice.value);
+    this.values = firstRun ? [0, 0, 0] : this.slices.map(slice => slice.value);
 
     this.pieGenerator = d3.pie().sort(null).value((d: number) => d)(this.values);
 
