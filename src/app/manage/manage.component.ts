@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
-import {AddTransactionDialogComponent} from '../add-transaction-dialog/add-transaction-dialog.component';
+import {TransactionDialogComponent} from '../transaction-dialog/transaction-dialog.component';
 import {routerTransition} from '../routing/router-transitions';
 import {Transaction} from '../model/transaction';
 import {DataAccessService} from '../data-access.service';
@@ -57,7 +57,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         title: 'Add Transaction'
       }
     };
-    this.dialog.open(AddTransactionDialogComponent, dialogData).afterClosed()
+    this.dialog.open(TransactionDialogComponent, dialogData).afterClosed()
       .filter(result => !!result)
       .subscribe(t => {
         this.sharedData.addTransaction(t);
@@ -72,7 +72,7 @@ export class ManageComponent implements OnInit, AfterViewInit {
         transaction: selectedTransaction
       }
     };
-    this.dialog.open(AddTransactionDialogComponent, dialogData).afterClosed()
+    this.dialog.open(TransactionDialogComponent, dialogData).afterClosed()
       .filter(result => !!result)
       .subscribe(t => {
         this.sharedData.editTransaction(selectedTransaction, t);

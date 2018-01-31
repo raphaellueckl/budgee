@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
-import {AddTransactionDialogComponent} from './add-transaction-dialog/add-transaction-dialog.component';
+import {TransactionDialogComponent} from './transaction-dialog/transaction-dialog.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -23,7 +23,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
-    AddTransactionDialogComponent,
+    TransactionDialogComponent,
     TransactionsComponent,
     OverviewComponent,
     MenuComponent,
@@ -47,7 +47,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     DataAccessService,
   ],
   entryComponents: [
-    AddTransactionDialogComponent,
+    TransactionDialogComponent,
     DownloadDialogComponent
   ],
   bootstrap: [AppComponent]

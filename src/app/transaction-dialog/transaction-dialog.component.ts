@@ -3,9 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Period} from '../model/transaction';
 
 @Component({
-  templateUrl: 'add-transaction-dialog.component.html'
+  templateUrl: 'transaction-dialog.component.html'
 })
-export class AddTransactionDialogComponent {
+export class TransactionDialogComponent {
 
   periods = [Period.Daily, Period.Weekly, Period.Quarter, Period.Monthly, Period.SixMonths, Period.Yearly];
 
@@ -17,7 +17,7 @@ export class AddTransactionDialogComponent {
   value: number;
   isIncome = false;
 
-  constructor(public dialogRef: MatDialogRef<AddTransactionDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<TransactionDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.dialogTitle = data.title;
     if (data.transaction) {
