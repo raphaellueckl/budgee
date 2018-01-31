@@ -35,4 +35,12 @@ export class DataAccessService {
     this.messageSource.next(this.transactions);
   }
 
+  editTransaction(old: Transaction, fresh: Transaction) {
+    old.title = fresh.title;
+    old.category = fresh.category;
+    old.period = fresh.period;
+    old.value = fresh.value;
+    old.isIncome = fresh.isIncome;
+  }
+
 }

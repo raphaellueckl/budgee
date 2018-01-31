@@ -17,3 +17,6 @@
   /*height: auto !important;*/
 /*}*/
 
+mat-row:hover {
+  background-color: #4fc3f7;
+}

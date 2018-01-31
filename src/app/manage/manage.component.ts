@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
 import {AddTransactionDialogComponent} from '../add-transaction-dialog/add-transaction-dialog.component';
 import {routerTransition} from '../routing/router-transitions';
-import {Period, Transaction} from '../model/transaction';
+import {Transaction} from '../model/transaction';
 import {DataAccessService} from '../data-access.service';
 import {DownloadDialogComponent} from '../download-dialog/download-dialog.component';
 
@@ -52,12 +52,31 @@ export class ManageComponent implements OnInit, AfterViewInit {
   }
 
   addNewTransactionDialog() {
-    this.dialog.open(AddTransactionDialogComponent).afterClosed()
+    const dialogData = {
+      data: {
+        title: 'Add Transaction'
+      }
+    };
+    this.dialog.open(AddTransactionDialogComponent, dialogData).afterClosed()
       .filter(result => !!result)
       .subscribe(t => {
-        const newTransaction = this.convertToTransaction(t);
-        this.sharedData.addTransaction(newTransaction);
+        this.sharedData.addTransaction(t);
         this.snackBar.open('Transaction added', undefined, this.snackBarConfig);
+      });
+  }
+
+  editSelectedTransaction(selectedTransaction: Transaction) {
+    const dialogData = {
+      data: {
+        title: 'Edit Transaction',
+        transaction: selectedTransaction
+      }
+    };
+    this.dialog.open(AddTransactionDialogComponent, dialogData).afterClosed()
+      .filter(result => !!result)
+      .subscribe(t => {
+        this.sharedData.editTransaction(selectedTransaction, t);
+        this.snackBar.open('Transaction edited', undefined, this.snackBarConfig);
       });
   }
 
@@ -92,16 +111,6 @@ export class ManageComponent implements OnInit, AfterViewInit {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     }, 0);
-  }
-
-  private convertToTransaction(newTransaction) {
-    const trans = new Transaction();
-    trans.title = newTransaction.title;
-    trans.category = newTransaction.category;
-    trans.period = <Period>Period[newTransaction.period];
-    trans.value = +newTransaction.value;
-    trans.isIncome = !!newTransaction.isIncome;
-    return trans;
   }
 
 }
