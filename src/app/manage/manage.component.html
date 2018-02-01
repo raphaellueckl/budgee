@@ -32,7 +32,7 @@
       <ng-container matColumnDef="income">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Income?</mat-header-cell>
         <mat-cell *matCellDef="let row" [style.color]="row.color">
-          <mat-checkbox [checked]="row.isIncome"></mat-checkbox>
+          <mat-checkbox [checked]="row.isIncome" disabled></mat-checkbox>
         </mat-cell>
       </ng-container>
 
