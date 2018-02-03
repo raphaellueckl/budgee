@@ -1,32 +1,29 @@
 <div [@flyInOut]>
-  <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
 
-  <div class="example-container mat-elevation-z8">
+  <mat-form-field fxLayout="row">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
 
+  <div class="mat-elevation-z8" fxLayout="column">
     <mat-table [dataSource]="dataSource" matSort>
-
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.title}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="category">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.category}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.category}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="period">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Period</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.period}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.period}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="value">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Value</mat-header-cell>
-        <mat-cell *matCellDef="let row" [style.color]="row.value"> {{row.value}}</mat-cell>
+        <mat-cell *matCellDef="let row" [style.color]="row.value">{{row.value}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="income">
@@ -37,7 +34,7 @@
       </ng-container>
 
       <ng-container matColumnDef="remove">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Remove</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Remove</mat-header-cell>
         <mat-cell *matCellDef="let row" (click)="removeTransaction(row)"><mat-icon>remove_circle_outline</mat-icon></mat-cell>
       </ng-container>
 
@@ -47,10 +44,9 @@
     </mat-table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
-
   </div>
 
-  <div class="fab-bottom-right">
+  <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" class="little-top-margin">
     <button mat-fab (click)="downloadTransactionsDialog()">
       <mat-icon>file_download</mat-icon>
     </button>
@@ -59,4 +55,5 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
+
 </div>

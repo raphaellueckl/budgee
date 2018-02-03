@@ -1,6 +1,6 @@
-<div [class.dark-theme]="isDarkTheme" fxFlex>
+<div [class.dark-theme]="isDarkTheme">
 
-  <mat-toolbar color="primary" fxLayout="row" fxLayoutGap="10px">
+  <mat-toolbar color="primary">
     <span>Budgee</span>
     <a [@flyInOut] routerLink="/overview" mat-button>Overview</a>
     <a [@flyInOut] routerLink="/manage" mat-button>Manage</a>
@@ -14,10 +14,6 @@
     <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
   </mat-menu>
 
-  <!--<mat-sidenav-container>-->
-  <!--<div fxLayout="row">-->
   <router-outlet></router-outlet>
-  <!--</div>-->
-  <!--</mat-sidenav-container>-->
 
 </div>

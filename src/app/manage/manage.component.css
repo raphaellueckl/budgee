@@ -1,22 +1,7 @@
-/*.mat-form-field {*/
-  /*font-size: 14px;*/
-  /*width: 100%;*/
-/*}*/
-
-/*.content {*/
-  /*padding: 12px;*/
-/*}*/
-
-/*.fab-bottom-right {*/
-  /*position: fixed;*/
-  /*right: 16px;*/
-  /*bottom: 16px;*/
-/*}*/
-
-/*/deep/ .mat-list-item-content {*/
-  /*height: auto !important;*/
-/*}*/
-
 mat-row:hover {
   background-color: #4fc3f7;
+}
+
+.little-top-margin {
+  margin-top: 10px
 }
