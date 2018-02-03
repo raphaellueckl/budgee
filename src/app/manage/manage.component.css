@@ -2,6 +2,11 @@ mat-row:hover {
   background-color: #4fc3f7;
 }
 
-.little-top-margin {
-  margin-top: 10px
+.little-margin {
+  margin: 8px;
 }
+
+.little-top-margin {
+  margin-top: 8px;
+}
+

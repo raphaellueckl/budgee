@@ -1,19 +1,23 @@
-<div [class.dark-theme]="isDarkTheme">
+<div [class.dark-theme]="isDarkTheme" fxLayout="column">
 
-  <mat-toolbar color="primary">
-    <span>Budgee</span>
-    <a [@flyInOut] routerLink="/overview" mat-button>Overview</a>
-    <a [@flyInOut] routerLink="/manage" mat-button>Manage</a>
-    <span fxFlex></span>
-    <button mat-icon-button [matMenuTriggerFor]="themeMenu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </mat-toolbar>
+  <div>
+    <mat-toolbar color="primary">
+      <span>Budgee</span>
+      <a [@flyInOut] routerLink="/overview" mat-button>Overview</a>
+      <a [@flyInOut] routerLink="/manage" mat-button>Manage</a>
+      <span fxFlex></span>
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar>
 
-  <mat-menu #themeMenu>
-    <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
-  </mat-menu>
+    <mat-menu #themeMenu>
+      <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+    </mat-menu>
+  </div>
 
-  <router-outlet></router-outlet>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 
 </div>

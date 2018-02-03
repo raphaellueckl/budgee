@@ -1,10 +1,10 @@
-<div [@flyInOut]>
+<div [@flyInOut] fxLayout="column" class="little-margin">
 
-  <mat-form-field fxLayout="row">
+  <mat-form-field >
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
-  <div class="mat-elevation-z8" fxLayout="column">
+  <div class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="start stretch">
     <mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
@@ -43,10 +43,12 @@
 
     </mat-table>
 
+    <!--<span fxFlex="1 1 auto"></span>-->
+
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" class="little-top-margin">
+  <div fxLayoutAlign="end" fxLayoutGap="10px" class="little-top-margin">
     <button mat-fab (click)="downloadTransactionsDialog()">
       <mat-icon>file_download</mat-icon>
     </button>
