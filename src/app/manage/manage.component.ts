@@ -31,8 +31,10 @@ export class ManageComponent implements OnInit, AfterViewInit {
     this.snackBarConfig = new MatSnackBarConfig();
     this.snackBarConfig.duration = 1500;
 
+    this.dataSource = new MatTableDataSource([]);
+
     this.sharedData.transactionListener().subscribe((t: Transaction[]) => {
-      this.dataSource = new MatTableDataSource(t);
+      this.dataSource.data = t;
     });
   }
 
