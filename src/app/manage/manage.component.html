@@ -4,7 +4,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
-  <div class="mat-elevation-z8" fxLayout="column" fxLayoutAlign="start stretch">
+  <div class="mat-elevation-z8" fxLayout="column">
     <mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
@@ -43,7 +43,7 @@
 
     </mat-table>
 
-    <!--<span fxFlex="1 1 auto"></span>-->
+    <!--<span fxFlex="1 1 auto"></span> todo doesn't work without fixed values-->
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
   </div>
