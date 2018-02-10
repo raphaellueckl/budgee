@@ -16,6 +16,8 @@ export class OverviewComponent implements OnInit {
   data: Transaction[];
   colours = ['#57A1C6', '#4FC3F7', '#36D7B7'];
 
+  byCategoryChartTitle = 'By category';
+
   constructor(
     private sharedData: DataAccessService
   ) {}

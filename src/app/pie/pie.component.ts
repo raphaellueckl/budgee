@@ -14,6 +14,7 @@ export class PieComponent implements OnInit {
   @ViewChild('containerPieChart') chartContainer: ElementRef;
   @Input() data: Transaction[];
   @Input() colours: string[];
+  @Input() title: string = "Title";
 
   hostElement: any;
   svg: any;
