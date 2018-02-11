@@ -11,8 +11,8 @@
   <div *ngIf="labels" class="legend" fxLayout="row" fxLayoutAlign="center" fxLayoutWrap>
     <div *ngFor="let label of labels; let i = index" class="item">
       <div fxFlex="1 1 100px" fxLayout="row" fxLayoutGap="8px">
-        <div class="circle" [ngStyle]="{'background': colourSlices[i]}"></div>
-        <div>{{label}}</div>
+        <div class="circle" [ngStyle]="{'background': colourSlices[i]}" fxFlexAlign="center"></div>
+        <div fxFlexAlign="center">{{label}}</div>
       </div>
     </div>
   </div>
