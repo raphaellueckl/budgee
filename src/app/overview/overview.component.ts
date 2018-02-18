@@ -14,9 +14,9 @@ export class OverviewComponent implements OnInit {
   transactions: Transaction[];
 
   data: Transaction[];
-  colours = ['#57A1C6', '#4FC3F7', '#36D7B7'];
+  colours = ['#53DAE8', '#51C6D7', '#4FB3C7', '#4CA0B5', '#488EA4', '#447C92', '#3E6B80', '#385A6E', '#314A5C'];
 
-  byCategoryChartTitle = 'By category';
+  expensesByCategoryChartTitle = 'Expenses by category';
 
   constructor(
     private sharedData: DataAccessService

@@ -1,7 +1,7 @@
-<!--<div [@flyInOut] fxLayout="row" fxLayoutWrap>-->
-<div [@flyInOut]>
+<div [@flyInOut] class="little-margin">
+  <app-pie-chart [data]="data" [colours]="colours" [title]="'Expenses by Category'" [groupBy]="'category'" fxFlex="1 1 300px"></app-pie-chart>
+  <app-pie-chart [data]="data" [colours]="colours" [title]="expensesByCategoryChartTitle" [groupBy]="'isIncome'" fxFlex="1 1 300px"></app-pie-chart>
   <!--<app-pie-chart [data]="data" [colours]="colours" [title]="byCategoryChartTitle" fxFlex="1 1 300px"></app-pie-chart>-->
-  <!--<app-pie-chart [data]="data" [colours]="colours" [title]="byCategoryChartTitle"></app-pie-chart>-->
-  <!--<app-pie-chart [data]="data" [colours]="colours" [title]="byCategoryChartTitle"></app-pie-chart>-->
-  <app-pie-chart [data]="data" [colours]="colours" [title]="byCategoryChartTitle"></app-pie-chart>
+  <!--<app-pie-chart [data]="data" [colours]="colours" [title]="byCategoryChartTitle" fxFlex="1 1 300px"></app-pie-chart>-->
+  <!--<app-pie-chart [data]="data" [colours]="colours" [title]="byCategoryChartTitle" fxFlex="1 1 300px"></app-pie-chart>-->
 </div>

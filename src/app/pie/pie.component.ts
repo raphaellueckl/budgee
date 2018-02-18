@@ -14,7 +14,8 @@ export class PieComponent implements OnInit {
   @ViewChild('containerPieChart') chartContainer: ElementRef;
   @Input() data: Transaction[];
   @Input() colours: string[];
-  @Input() title: string = "Title";
+  @Input() title: string;
+  @Input() groupBy: string;
 
   hostElement: any;
   svg: any;
@@ -146,13 +147,13 @@ export class PieComponent implements OnInit {
   };
 
   updateSlices = (newData: Array<any>): Array<any> => {
-    const queriesByCategories = _.groupBy(_.sortBy(newData, 'category'), 'category');
+    const groupedQueries = _.groupBy(_.sortBy(newData, this.groupBy), this.groupBy);
     const results = [];
 
-    Object.keys(queriesByCategories).map((category) => {
+    Object.keys(groupedQueries).map((category) => {
       results.push({
         category: category,
-        value: queriesByCategories[category].length,
+        value: groupedQueries[category].length,
       });
     });
 

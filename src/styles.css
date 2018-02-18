@@ -4,3 +4,11 @@
 body {
   margin: 0;
 }
+
+.little-margin {
+  padding: 8px;
+}
+
+.little-top-margin {
+  padding-top: 8px;
+}
